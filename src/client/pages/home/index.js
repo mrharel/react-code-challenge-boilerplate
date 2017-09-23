@@ -12,13 +12,12 @@ const HomeTitle = styled.h1`
 const Content = styled.div``;
 
 class Home extends React.Component {
-
   state = {
-    color: "red",
+    color: 'red',
   };
 
   onTitleClick = () => {
-    this.setState({ color: this.state.color === 'red' ? 'green': 'red' });
+    this.setState({ color: this.state.color === 'red' ? 'green' : 'red' });
   };
 
   render() {
@@ -27,13 +26,13 @@ class Home extends React.Component {
     return (
       <Content>
         <HomeTitle
-          className={ready ? 'ready': 'not-ready'}
+          className={ready ? 'ready' : 'not-ready'}
           onClick={this.onTitleClick}
           style={{ color: this.state.color }}
         >
           Start dev from this place...
         </HomeTitle>
-        <img src="/static/react-logo.png" />
+        <img alt="" src="/static/react-logo.png" />
       </Content>
     );
   }
@@ -51,7 +50,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
