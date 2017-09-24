@@ -1,6 +1,6 @@
 import { APP_INITIALIZED } from '../actions/app.actions';
 
-const initialState = {
+export const initialState = {
   ready: false,
   config: {
     debug: true,

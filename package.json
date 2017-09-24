@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon -w src src/server/index.js",
     "lint": "eslint src",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "tdd": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "eslint-plugin-jest": "^21.1.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
+    "jest": "^21.1.0",
     "nodemon": "^1.12.1"
   },
   "babel": {
