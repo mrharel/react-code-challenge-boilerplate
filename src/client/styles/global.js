@@ -6,6 +6,10 @@ injectGlobal`
   html,
   body {    
     background-color: ${COLORS.APP_BGCOLOR};
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
   }
   body {
     font-family: ${FONTS.FAMILY};
