@@ -14,7 +14,7 @@ code challenges, and share it with others.
 - `eslint` for linting
 
 ## Runnning
-`npm i && npm start`
+`npm i && npm start` and then open `http://localhost:8080`
 
 ## Server
 Using express, the server is doing the followings:
