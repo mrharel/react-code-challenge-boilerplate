@@ -1,7 +1,7 @@
 {
   "name": "react-code-challenge-boilerplate",
   "version": "1.0.0",
-  "description": "boilerplate for react code challenge for interviews",
+  "description": "boilerplate for a react code challenge for interviews",
   "main": "index.js",
   "scripts": {
     "start": "nodemon -w src src/server/index.js",
