@@ -24,4 +24,5 @@ Using express, the server is doing the followings:
 
 ## Client
 The client start point is at `src/client/app/index.js` where the react and redux is created and initialized.
- 
+
+In case you need to fetch data from a server there is the `src/client/api` which exports the `apiCall` method. 
