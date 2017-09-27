@@ -33,6 +33,7 @@ const BigContainer = styled.div`
 const SmallContainer = styled.div`
   .wrapper {
     display: inline-block;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
   
   .image {
@@ -111,7 +112,7 @@ const HTML5toTouch = {
       backend: HTML5Backend
     },
     {
-      backend: TouchBackend({enableMouseEvents: true, delayTouchStart: 500}), // Note that you can call your backends with options
+      backend: TouchBackend({ delayTouchStart: 500 }), // Note that you can call your backends with options
       preview: true,
       transition: TouchTransition
     }

@@ -8,6 +8,7 @@ const ImageWrapper = styled.div`
   display: inline-block; 
   user-select: none;
   transition: transform 0.5s;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   
   &.touch {
     transform: scale(1.2);
@@ -31,6 +32,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 `;
 
 
@@ -39,17 +41,13 @@ class Image extends React.Component {
     touching: false,
   };
 
-  lastTouch = null;
-
   onTouchStart = () => {
-    console.log('onTouchStart')
     this.timer = setTimeout(() => {
       this.setState({ touching: true });
     }, 500);
 
   };
   onTouchMove = () => {
-    console.log('onTouchMove')
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
@@ -57,7 +55,6 @@ class Image extends React.Component {
     this.setState({ touching: false });
   };
   onTouchEnd = () => {
-    console.log('onTouchEnd')
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
