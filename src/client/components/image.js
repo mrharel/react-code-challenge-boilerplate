@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { DragSource, DropTarget } from "react-dnd";
 import { findDOMNode } from 'react-dom';
+import { getEmptyImage } from 'react-dnd-html5-backend';
+
 
 const ImageWrapper = styled.div`
   position: relative; 
@@ -41,7 +43,32 @@ class Image extends React.Component {
     touching: false,
   };
 
-  onTouchStart = () => {
+  componentDidMount() {
+    // Use empty image as a drag preview so browsers don't draw it
+    // and we can draw whatever we want on the custom drag layer instead.
+    this.props.connectDragPreview(getEmptyImage(), {
+      // IE fallback: specify that we'd rather screenshot the node
+      // when it already knows it's being dragged so we can hide it with CSS.
+      captureDraggingState: true,
+    });
+  }
+
+  onClick = (e) => {
+    if (this.props.isMaster) {
+      this.props.onPointer({ x: e.clientX, y: e.clientY });
+    } else {
+      this.props.onPointer();
+    }
+
+  };
+
+  onTouchStart = (e) => {
+    if (this.props.isMaster && e.touches[0]) {
+      this.props.onPointer({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    } else {
+      this.props.onPointer();
+    }
+
     this.timer = setTimeout(() => {
       this.setState({ touching: true });
     }, 500);
@@ -68,10 +95,17 @@ class Image extends React.Component {
 
 
     return connectDragSource(connectDropTarget(
-      <div style={{ opacity }} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd} className="wrapper">
+      <div
+        style={{ opacity }}
+        onMouseDown={this.onClick}
+        onTouchStart={this.onTouchStart}
+        onTouchMove={this.onTouchMove}
+        onTouchEnd={this.onTouchEnd}
+        className="wrapper"
+      >
         <ImageWrapper className={`image ${this.state.touching ? "touch": ""}`}>
           <Overlay>Overlay</Overlay>
-          <img src={src} />
+          <img data-id={this.props.id} src={src} />
         </ImageWrapper>
       </div>
     ));
@@ -87,15 +121,6 @@ const cardSource = {
       index: props.index,
     };
   },
-
-  endDrag() {
-
-  }
-  //
-  // canDrag(props) {
-  //   console.log("candrag", props);
-  //   return false;
-  // }
 };
 
 const cardTarget = {
@@ -172,6 +197,7 @@ const droppableComponent = DropTarget("IMAGE", cardTarget,  (connect, monitor) =
 
 const draggableComponent = DragSource("IMAGE", cardSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging(),
 }))(droppableComponent);
 

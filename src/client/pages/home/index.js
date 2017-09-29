@@ -8,6 +8,7 @@ import MultiBackend, { TouchTransition, Preview } from 'react-dnd-multi-backend'
 import { DragDropContext } from 'react-dnd';
 import { COLORS } from '../../styles/constants';
 import Image from '../../components/image';
+import ImageDragLayer from '../../components/imageDragLayer';
 
 const Content = styled.div``;
 
@@ -51,20 +52,12 @@ const Long = styled.div`
 class Home extends React.Component {
   state = {
     images: IMAGES,
+    pointer: null,
   };
 
-
-  generatePreview = (type, item, style) => {
-    console.log("generatePreview", type, item, style);
-    return (
-      <SmallContainer style={{...style, width: 90, height: 90, zIndex: 99999}} className="test" >
-        <Image src={this.state.images.find(data => data.id === item.id).src}/>
-      </SmallContainer>
-    );
-  };
+  onPointer = (pointer) => this.setState({ pointer });
 
   changeImageLocation = (dragIndex, hoverIndex) => {
-    console.log("changeImageLocation:",dragIndex, hoverIndex );
     this.setState({ images: this.state.images.map((image, index) => {
       if (index === dragIndex) return this.state.images[hoverIndex];
       if (index === hoverIndex) return this.state.images[dragIndex];
@@ -77,13 +70,13 @@ class Home extends React.Component {
     const { images } = this.state;
     return (
       <Content>
-        <Preview generator={this.generatePreview} />
         <BigContainer>
-          <Image onSwap={this.changeImageLocation} src={images[0].src} id={images[0].id} index={0}/>
+          <Image isMaster={true} onPointer={this.onPointer} onSwap={this.changeImageLocation} src={images[0].src} id={images[0].id} index={0}/>
         </BigContainer>
         <SmallContainer>
-          {images.map((data, index) => index === 0 ? null : <Image onSwap={this.changeImageLocation}  key={data.id} index={index} id={data.id} src={data.src} />)}
+          {images.map((data, index) => index === 0 ? null : <Image isMaster={false} onPointer={this.onPointer} onSwap={this.changeImageLocation}  key={data.id} index={index} id={data.id} src={data.src} />)}
         </SmallContainer>
+        <ImageDragLayer pointer={this.state.pointer} />
         <Long>kjdfhg dfkjgh dfskgjh fdslkgjh dsfklgjh sdfkjlgh </Long>
       </Content>
     );
@@ -113,7 +106,7 @@ const HTML5toTouch = {
     },
     {
       backend: TouchBackend({ delayTouchStart: 500 }), // Note that you can call your backends with options
-      preview: true,
+      //preview: true,
       transition: TouchTransition
     }
   ]
