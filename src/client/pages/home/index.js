@@ -9,6 +9,7 @@ import { DragDropContext } from 'react-dnd';
 import { COLORS } from '../../styles/constants';
 import Image from '../../components/image';
 import ImageDragLayer from '../../components/imageDragLayer';
+import DropZone from '../../components/dropZone';
 
 const Content = styled.div``;
 
@@ -70,12 +71,14 @@ class Home extends React.Component {
     const { images } = this.state;
     return (
       <Content>
-        <BigContainer>
-          <Image isMaster={true} onPointer={this.onPointer} onSwap={this.changeImageLocation} src={images[0].src} id={images[0].id} index={0}/>
-        </BigContainer>
-        <SmallContainer>
-          {images.map((data, index) => index === 0 ? null : <Image isMaster={false} onPointer={this.onPointer} onSwap={this.changeImageLocation}  key={data.id} index={index} id={data.id} src={data.src} />)}
-        </SmallContainer>
+        <DropZone>
+          <BigContainer>
+            <Image isMaster={true} onPointer={this.onPointer} onSwap={this.changeImageLocation} src={images[0].src} id={images[0].id} index={0}/>
+          </BigContainer>
+          <SmallContainer>
+            {images.map((data, index) => index === 0 ? null : <Image isMaster={false} onPointer={this.onPointer} onSwap={this.changeImageLocation}  key={data.id} index={index} id={data.id} src={data.src} />)}
+          </SmallContainer>
+        </DropZone>
         <ImageDragLayer pointer={this.state.pointer} />
         <Long>kjdfhg dfkjgh dfskgjh fdslkgjh dsfklgjh sdfkjlgh </Long>
       </Content>

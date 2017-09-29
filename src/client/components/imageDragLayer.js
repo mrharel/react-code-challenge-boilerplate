@@ -46,6 +46,7 @@ function getItemStyles(props) {
 
 class CustomDragLayer extends Component {
   renderItem(type, item) {
+    console.log("renderItem ", type, item);
     const img = document.querySelector(`img[data-id="${item.id}"]`);
     const width = 90;//img ? img.clientWidth : 90;
     const height = 90;//img ? img.clientHeight : 90;
@@ -58,8 +59,9 @@ class CustomDragLayer extends Component {
 
   render() {
     const { item, itemType, isDragging } = this.props;
+    console.log(item, itemType, isDragging);
 
-    if (!isDragging) {
+    if (!isDragging || itemType !== 'IMAGE') { // itemType could be __NATIVE_FILE__ in case of file dnd.
       return null;
     }
 
