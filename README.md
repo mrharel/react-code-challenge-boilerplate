@@ -11,7 +11,7 @@ code challenges, and share it with others.
 - `React` & `Redux` on the front end 
 - `styled-components` for styling the app. 
 - `jest` for unit testing
-- `eslint` for linting
+- `eslint` for linting the code. 
 
 ## Runnning
 `npm i && npm start` and then open `http://localhost:8080`
@@ -23,4 +23,6 @@ Using express, the server is doing the followings:
 - API endpoint placeholder. there is a demo API at `http://localhost:8080/api/version`
 
 ## Client
-The client start point is at `src/client/app/index.js` where the react and redux is created and initialized. 
+The client start point is at `src/client/app/index.js` where the react and redux is created and initialized.
+
+In case you need to fetch data from a server there is the `src/client/api` which exports the `apiCall` method. 

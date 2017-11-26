@@ -21,11 +21,11 @@ export const apiCall = ({
     body: reqBody,
   };
   fetch(`${BASE_API}${url}`, fetchOptions)
-  .then((response) => {
-    const isSuccess = response.status === 200;
-    return response.json().then(isSuccess ? res : rej);
-  })
-  .catch((err) => {
-    rej(err);
-  });
+    .then((response) => {
+      const isSuccess = response.status === 200;
+      return response.json().then(isSuccess ? res : rej);
+    })
+    .catch((err) => {
+      rej(err);
+    });
 });
