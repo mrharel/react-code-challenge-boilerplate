@@ -43,15 +43,9 @@ const mapStateToProps = state => ({
   ready: state.app.ready,
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
 Home.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);
