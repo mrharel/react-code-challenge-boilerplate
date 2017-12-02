@@ -4,6 +4,9 @@ export const WEB_WORKER_ADS = 'webworker-ads';
 export const WEB_WORKER_ERROR = 'webworker-error';
 
 class ServiceAds {
+  worker = null;
+  workerBusy = false;
+
   getAds() {
     const ads = this.loadFromStorage();
     if (ads) {
@@ -30,6 +33,10 @@ class ServiceAds {
   }
 
   loadAdsFromWorker() {
+    if (this.workerBusy) {
+      // for now we ignore request while worker is running...
+      return Promise.reject('worker still running');
+    }
     return new Promise((resolve, reject) => {
       if (!window.Worker) {
         reject('WebWorker is not supported by this browser');
@@ -50,13 +57,16 @@ class ServiceAds {
     const msg = JSON.parse(e.data);
     switch (msg.type) {
       case WEB_WORKER_READY:
+        this.workerBusy = true;
         this.sendMessageToWorker({ type: WEB_WORKER_LOAD_ADS });
         break;
       case WEB_WORKER_ADS:
+        this.workerBusy = false;
         this.saveToStorage(msg.ads);
         this.resolve(msg.ads);
         break;
       case WEB_WORKER_ERROR:
+        this.workerBusy = false;
         this.reject(msg.error);
         break;
       default:
