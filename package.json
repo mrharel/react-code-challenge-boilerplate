@@ -67,6 +67,7 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
+      "no-plusplus": 0,
       "arrow-body-style": [
         2,
         "as-needed"

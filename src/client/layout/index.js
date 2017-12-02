@@ -4,14 +4,17 @@ import styled from 'styled-components';
 import { COLORS } from '../styles/constants';
 
 const Main = styled.div`
-  
+  background: #eee;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Header = styled.div`
-  background-color: #fff;
   padding: 20px;
-  text-align: center;
-  border-bottom: 1px solid ${COLORS.BORDER_GRAY};
+  height: 40px;
 `;
 const Footer = styled.div`
   border-bottom: 1px solid ${COLORS.BORDER_GRAY};
@@ -22,15 +25,17 @@ const Footer = styled.div`
 `;
 const Content = styled.div`
   padding: 10px;
+  display: flex;
+  flex: 1;
 `;
 
 const Layout = ({ children }) => (
   <Main>
-    <Header>Header</Header>
+    <Header>OLX</Header>
     <Content>
       {children}
     </Content>
-    <Footer>Footer</Footer>
+    <Footer />
   </Main>
 );
 

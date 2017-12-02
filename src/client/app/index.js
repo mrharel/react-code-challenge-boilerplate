@@ -9,8 +9,7 @@ import {
 } from 'react-router-dom';
 import Layout from '../layout';
 import createReducer from '../reducers';
-import Home from '../pages/home';
-import { appInitializedAction } from '../actions/app.actions';
+import Ads from '../pages/ads';
 import '../styles/global';
 
 const configureStore = (initialState = {}) => {
@@ -38,15 +37,13 @@ const render = () => {
     <Provider store={store}>
       <Router>
         <Layout>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Ads} />
           <Route path="/test" component={Test} />
         </Layout>
       </Router>
     </Provider>,
     document.getElementById('app'),
   );
-
-  store.dispatch(appInitializedAction());
 };
 
 render();

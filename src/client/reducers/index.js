@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import appReducer from './app.reducer';
+import adsReducer from './ads.reducer';
 
 export default () => combineReducers({
-  app: appReducer,
+  ads: adsReducer,
 });
 
