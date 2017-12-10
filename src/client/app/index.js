@@ -45,8 +45,6 @@ const render = () => {
     </Provider>,
     document.getElementById('app'),
   );
-
-  store.dispatch(appInitializedAction());
 };
 
 render();
